@@ -1,5 +1,5 @@
 ---
-forgejo_version: "12.0.4"
+forgejo_version: "15.0.3"
 forgejo_user: git
 forgejo_group: git
 forgejo_home: /home/git
