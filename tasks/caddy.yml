@@ -29,10 +29,10 @@
 - name: Install xcaddy
   ansible.builtin.command:
     cmd: /usr/local/go/bin/go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
+    creates: /usr/local/bin/xcaddy
   environment:
     GOPATH: /opt/go
     GOBIN: /usr/local/bin
-  creates: /usr/local/bin/xcaddy
 
 - name: Build caddy with plugins via xcaddy
   ansible.builtin.command:
@@ -42,9 +42,9 @@
       --with {{ plugin }}
       {% endfor %}
       --output /usr/local/bin/caddy
+    creates: /usr/local/bin/caddy
   environment:
     GOPATH: /opt/go
-  creates: /usr/local/bin/caddy
 
 - name: Set caddy binary capabilities
   community.general.capabilities:
