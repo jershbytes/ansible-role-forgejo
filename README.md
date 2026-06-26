@@ -63,7 +63,6 @@ Based on: https://puvvadi.net/posts/self-hosting-github-alternative-forgejo-with
   become: true
   roles:
     - role: ansible-role-forgejo
-      forgejo_version: "12.0.0"
       forgejo_domain: git.example.com
       forgejo_root_url: "https://git.example.com"
       forgejo_caddy_email: admin@example.com
