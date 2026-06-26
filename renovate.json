@@ -1,0 +1,51 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "group:all",
+    ":automergeMinor",
+    ":automergeDigest",
+    ":separateMultipleMajorReleases"
+  ],
+  "timezone": "America/Detroit",
+  "labels": [
+    "renovate"
+  ],
+  "major": {
+    "addLabels": [
+      "major"
+    ]
+  },
+  "minor": {
+    "addLabels": [
+      "minor"
+    ]
+  },
+  "patch": {
+    "addLabels": [
+      "patch"
+    ]
+  },
+  "pin": {
+    "addLabels": [
+      "pin"
+    ]
+  },
+  "digest": {
+    "addLabels": [
+      "digest"
+    ]
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["defaults/main\\.yml$"],
+      "matchStrings": [
+        "forgejo_version:\\s*\"(?<currentValue>.*?)\"\\n"
+      ],
+      "datasourceTemplate": "gitea-releases",
+      "registryUrlTemplate": "https://codeberg.org",
+      "depNameTemplate": "forgejo/forgejo"
+    }
+  ]
+}
