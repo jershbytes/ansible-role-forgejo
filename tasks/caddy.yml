@@ -77,6 +77,25 @@
     group: root
     mode: "0755"
 
+- name: Validate Caddy DNS challenge settings
+  ansible.builtin.assert:
+    that:
+      - forgejo_domain != "localhost"
+      - forgejo_caddy_cloudflare_api_token | length > 0
+      - forgejo_caddy_dns_resolvers | length > 0
+    fail_msg: >-
+      Caddy DNS-01 challenge needs a real forgejo_domain, forgejo_caddy_cloudflare_api_token,
+      and at least one forgejo_caddy_dns_resolvers entry.
+
+- name: Deploy caddy environment file
+  ansible.builtin.template:
+    src: caddy.env.j2
+    dest: /etc/caddy/caddy.env
+    owner: root
+    group: root
+    mode: "0600"
+  notify: Restart caddy
+
 - name: Deploy Caddyfile
   ansible.builtin.template:
     src: Caddyfile.j2

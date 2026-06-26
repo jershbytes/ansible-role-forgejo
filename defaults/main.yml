@@ -32,4 +32,10 @@ forgejo_caddy_xcaddy_plugins:
   - github.com/caddy-dns/cloudflare
 forgejo_caddy_email: ""
 forgejo_caddy_cloudflare_api_token: ""
+forgejo_caddy_cloudflare_zone_api_token: ""
+forgejo_caddy_dns_resolvers:
+  - "1.1.1.1"
+  - "8.8.8.8"
+forgejo_caddy_propagation_delay: "30s"
+forgejo_caddy_propagation_timeout: "2m"
 forgejo_go_version: "1.23.4"

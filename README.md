@@ -50,6 +50,10 @@ Based on: https://puvvadi.net/posts/self-hosting-github-alternative-forgejo-with
 | `forgejo_caddy_xcaddy_plugins` | `[github.com/caddy-dns/cloudflare]` | xcaddy plugins to compile into Caddy |
 | `forgejo_caddy_email` | `` | Email for ACME/TLS certificate |
 | `forgejo_caddy_cloudflare_api_token` | `` | Cloudflare API token for DNS challenge |
+| `forgejo_caddy_cloudflare_zone_api_token` | `` | Optional Cloudflare token with `Zone:Read` scope (recommended for restricted API tokens) |
+| `forgejo_caddy_dns_resolvers` | `['1.1.1.1', '8.8.8.8']` | Recursive resolvers used for DNS challenge checks |
+| `forgejo_caddy_propagation_delay` | `30s` | Wait before DNS propagation checks begin |
+| `forgejo_caddy_propagation_timeout` | `2m` | Max time to wait for DNS propagation |
 | `forgejo_go_version` | `1.23.4` | Go version used to build xcaddy/Caddy |
 
 ## Example Playbook
@@ -64,7 +68,19 @@ Based on: https://puvvadi.net/posts/self-hosting-github-alternative-forgejo-with
       forgejo_root_url: "https://git.example.com"
       forgejo_caddy_email: admin@example.com
       forgejo_caddy_cloudflare_api_token: "{{ vault_cloudflare_token }}"
+      forgejo_caddy_cloudflare_zone_api_token: "{{ vault_cloudflare_zone_read_token }}"
 ```
+
+Cloudflare token requirements for DNS-01:
+
+- `forgejo_caddy_cloudflare_api_token`: `Zone:DNS:Edit` for the zone that contains your domain (for example, `jershlabs.xyz`).
+- `forgejo_caddy_cloudflare_zone_api_token` (optional but recommended): `Zone:Read` for the same zone.
+
+If you see errors like `expected 1 zone, got 0 for xyz`, Cloudflare could not match a managed zone for your challenge domain. This is usually caused by one of these:
+
+- The token does not include the correct zone.
+- `Zone:Read` permission is missing.
+- The FQDN is not under a Cloudflare-managed zone.
 
 To skip the Caddy setup (e.g. if you already have a reverse proxy):
 

@@ -7,6 +7,7 @@ Requires=network-online.target
 Type=notify
 User=caddy
 Group=caddy
+EnvironmentFile=-/etc/caddy/caddy.env
 ExecStart=/usr/local/bin/caddy run --environ --config /etc/caddy/Caddyfile
 ExecReload=/usr/local/bin/caddy reload --config /etc/caddy/Caddyfile --force
 TimeoutStopSec=5s

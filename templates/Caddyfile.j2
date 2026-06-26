@@ -1,6 +1,13 @@
 {{ forgejo_domain }} {
+{% if forgejo_caddy_email | length > 0 %}
   tls {{ forgejo_caddy_email }} {
-    dns cloudflare {{ forgejo_caddy_cloudflare_api_token }}
+{% else %}
+  tls {
+{% endif %}
+    dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+    resolvers {{ forgejo_caddy_dns_resolvers | join(' ') }}
+    propagation_delay {{ forgejo_caddy_propagation_delay }}
+    propagation_timeout {{ forgejo_caddy_propagation_timeout }}
   }
   reverse_proxy localhost:{{ forgejo_http_port }}
 }
