@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: forgejo
+  author: jershbytes
+  description: Install and configure Forgejo git server
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Debian
+      versions:
+        - bookworm
+        - trixie
+    - name: Ubuntu
+      versions:
+        - all

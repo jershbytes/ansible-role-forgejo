@@ -1,0 +1,29 @@
+{
+  "ansible.python.interpreterPath": "/usr/bin/python3",
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.tabSize": 2,
+  "yaml.schemas": {
+      "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/vars.json": [
+          "defaults/**/*.yml",
+          "vars/**/*.yml"
+      ],
+      "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": [
+          "playbooks/**/*.yml"
+      ],
+      "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks": [
+          "tasks/**/*.yml"
+      ],
+      "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/meta.json": [
+          "meta/**/*.yml"
+      ],
+      "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/requirements.json": [
+          "roles/**/requirements.yml"
+      ],
+      "https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json": [
+          "**/azure-pipelines.yml"
+      ]
+  }
+}

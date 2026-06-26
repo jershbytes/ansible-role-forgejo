@@ -1,0 +1,35 @@
+---
+forgejo_version: "12.0.0"
+forgejo_user: git
+forgejo_group: git
+forgejo_home: /home/git
+forgejo_work_dir: /var/lib/forgejo
+forgejo_config_dir: /etc/forgejo
+forgejo_bin_path: /usr/local/bin/forgejo
+
+# Server settings
+forgejo_domain: localhost
+forgejo_http_port: "3000"
+forgejo_root_url: "http://{{ forgejo_domain }}:{{ forgejo_http_port }}"
+forgejo_ssh_port: "22"
+
+# Database settings
+forgejo_db_type: sqlite3
+forgejo_db_path: "{{ forgejo_work_dir }}/forgejo.db"
+forgejo_db_host: ""
+forgejo_db_name: ""
+forgejo_db_user: ""
+forgejo_db_password: ""
+
+# App settings
+forgejo_app_name: "Forgejo"
+forgejo_run_mode: prod
+forgejo_disable_registration: "false"
+
+# Caddy settings
+forgejo_caddy_enabled: true
+forgejo_caddy_xcaddy_plugins:
+  - github.com/caddy-dns/cloudflare
+forgejo_caddy_email: ""
+forgejo_caddy_cloudflare_api_token: ""
+forgejo_go_version: "1.23.4"

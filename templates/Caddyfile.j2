@@ -1,0 +1,6 @@
+{{ forgejo_domain }} {
+  tls {{ forgejo_caddy_email }} {
+    dns cloudflare {{ forgejo_caddy_cloudflare_api_token }}
+  }
+  reverse_proxy localhost:{{ forgejo_http_port }}
+}

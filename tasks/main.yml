@@ -1,0 +1,65 @@
+---
+- name: Create forgejo group
+  ansible.builtin.group:
+    name: "{{ forgejo_group }}"
+    system: true
+    state: present
+
+- name: Create forgejo user
+  ansible.builtin.user:
+    name: "{{ forgejo_user }}"
+    group: "{{ forgejo_group }}"
+    home: "{{ forgejo_home }}"
+    shell: /bin/bash
+    system: true
+    create_home: true
+    state: present
+
+- name: Download forgejo binary
+  ansible.builtin.get_url:
+    url: "https://codeberg.org/forgejo/forgejo/releases/download/v{{ forgejo_version }}/forgejo-{{ forgejo_version }}-linux-amd64"
+    dest: "{{ forgejo_bin_path }}"
+    mode: "0755"
+  notify: Restart forgejo
+
+- name: Create forgejo directories
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ forgejo_user }}"
+    group: "{{ forgejo_group }}"
+    mode: "{{ item.mode }}"
+  loop:
+    - { path: "{{ forgejo_work_dir }}", mode: "0750" }
+    - { path: "{{ forgejo_work_dir }}/custom", mode: "0750" }
+    - { path: "{{ forgejo_work_dir }}/data", mode: "0750" }
+    - { path: "{{ forgejo_work_dir }}/log", mode: "0750" }
+    - { path: "{{ forgejo_config_dir }}", mode: "0750" }
+
+- name: Deploy forgejo configuration
+  ansible.builtin.template:
+    src: app.ini.j2
+    dest: "{{ forgejo_config_dir }}/app.ini"
+    owner: "{{ forgejo_user }}"
+    group: "{{ forgejo_group }}"
+    mode: "0640"
+  notify: Restart forgejo
+
+- name: Deploy forgejo systemd service
+  ansible.builtin.template:
+    src: forgejo.service.j2
+    dest: /etc/systemd/system/forgejo.service
+    mode: "0644"
+  notify:
+    - Reload systemd
+    - Restart forgejo
+
+- name: Enable and start forgejo
+  ansible.builtin.systemd:
+    name: forgejo
+    enabled: true
+    state: started
+
+- name: Include caddy tasks
+  ansible.builtin.include_tasks: caddy.yml
+  when: forgejo_caddy_enabled
