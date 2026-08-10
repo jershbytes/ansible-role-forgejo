@@ -46,6 +46,15 @@
       "datasourceTemplate": "gitea-releases",
       "registryUrlTemplate": "https://codeberg.org",
       "depNameTemplate": "forgejo/forgejo"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": ["defaults/main\\.yml$"],
+      "matchStrings": [
+        "forgejo_go_version:\\s*\"(?<currentValue>.*?)\"\\n"
+      ],
+      "datasourceTemplate": "golang-version",
+      "depNameTemplate": "go"
     }
   ]
 }
