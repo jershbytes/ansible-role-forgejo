@@ -38,4 +38,4 @@ forgejo_caddy_dns_resolvers:
   - "8.8.8.8"
 forgejo_caddy_propagation_delay: "30s"
 forgejo_caddy_propagation_timeout: "2m"
-forgejo_go_version: "1.26.5"
+forgejo_go_version: "1.26.6"
