@@ -2,7 +2,7 @@
 
 Installs [Forgejo](https://forgejo.org/) (a self-hosted Git forge) as a systemd service with optional Caddy reverse proxy built via [xcaddy](https://github.com/caddyserver/xcaddy) for automatic HTTPS using Cloudflare DNS challenges.
 
-Based on: https://puvvadi.net/posts/self-hosting-github-alternative-forgejo-with-ssh/
+Based on: <https://puvvadi.net/posts/self-hosting-github-alternative-forgejo-with-ssh/>
 
 ## What This Role Does
 
@@ -23,7 +23,7 @@ Based on: https://puvvadi.net/posts/self-hosting-github-alternative-forgejo-with
 ### Forgejo
 
 | Variable | Default | Description |
-|----------|---------|-------------|
+| -------- | ------- | ----------- |
 | `forgejo_version` | `12.0.0` | Forgejo release version to install |
 | `forgejo_user` | `git` | System user that runs Forgejo |
 | `forgejo_group` | `git` | System group for Forgejo |
@@ -45,7 +45,7 @@ Based on: https://puvvadi.net/posts/self-hosting-github-alternative-forgejo-with
 ### Caddy (optional)
 
 | Variable | Default | Description |
-|----------|---------|-------------|
+| -------- | ------- | ----------- |
 | `forgejo_caddy_enabled` | `true` | Whether to install and configure Caddy |
 | `forgejo_caddy_xcaddy_plugins` | `[github.com/caddy-dns/cloudflare]` | xcaddy plugins to compile into Caddy |
 | `forgejo_caddy_email` | `` | Email for ACME/TLS certificate |
@@ -95,7 +95,7 @@ To skip the Caddy setup (e.g. if you already have a reverse proxy):
 
 The role creates the `git` user with `/bin/bash` as its shell. Forgejo manages `~git/.ssh/authorized_keys` automatically, so SSH clone/push works out of the box on port 22:
 
-```
+```sh
 git clone git@git.example.com:user/repo.git
 ```
 
