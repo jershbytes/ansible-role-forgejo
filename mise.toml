@@ -1,0 +1,5 @@
+[tools]
+prek = "0.4.14"
+
+[settings]
+yes = true
