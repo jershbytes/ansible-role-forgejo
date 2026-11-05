@@ -4,4 +4,7 @@ profile: production # min, basic, moderate, safety, shared, production
 skip_list:
   - yaml[line-length]
 
+exclude_paths:
+  - var/
+
 offline: true

@@ -3,3 +3,8 @@
 
 # Retry files generated for failed Ansible playbook runs
 *.retry
+
+# Vault passwords
+.vault_pass
+
+/var/
