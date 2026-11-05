@@ -1,5 +1,0 @@
-[tools]
-pipx = 'latest'
-'pipx:ansible-dev-tools' = 'latest'
-'pipx:awxkit' = 'latest'
-'pipx:yamllint' = 'latest'
